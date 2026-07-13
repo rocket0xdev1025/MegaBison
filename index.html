@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mega Bison ($MEGABISON) | Unstoppable Solana Meme</title>
+  <meta name="description" content="Mega Bison charges with unstoppable power, fearless momentum, and wild meme energy across Solana. $MEGABISON" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bison: {
+              gold: '#fcad2b',
+              dark: '#0a0a0a',
+              charcoal: '#14110c',
+              brown: '#1a1208',
+              glow: '#ffc04d',
+            }
+          },
+          fontFamily: {
+            display: ['Impact', 'Haettenschweiler', 'Arial Black', 'sans-serif'],
+            body: ['Segoe UI', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            glow: '0 0 40px rgba(252, 173, 43, 0.45)',
+            'glow-sm': '0 0 20px rgba(252, 173, 43, 0.35)',
+            card: '0 20px 50px rgba(0,0,0,0.45)',
+          },
+          animation: {
+            'pulse-glow': 'pulseGlow 2.5s ease-in-out infinite',
+            'float': 'float 4s ease-in-out infinite',
+            'charge': 'charge 1.2s ease-in-out infinite',
+          },
+          keyframes: {
+            pulseGlow: {
+              '0%, 100%': { boxShadow: '0 0 20px rgba(252,173,43,0.3)' },
+              '50%': { boxShadow: '0 0 45px rgba(252,173,43,0.7)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            charge: {
+              '0%, 100%': { transform: 'translateX(0)' },
+              '50%': { transform: 'translateX(4px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fcad2b;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255, 220, 120, 0.55), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 50%, rgba(255, 160, 40, 0.35), transparent),
+        radial-gradient(ellipse 50% 30% at 0% 80%, rgba(180, 90, 10, 0.25), transparent),
+        linear-gradient(180deg, #fcad2b 0%, #e89518 40%, #fcad2b 100%);
+      min-height: 100vh;
+    }
+    .bison-pattern {
+      background-image:
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 12px,
+          rgba(0,0,0,0.03) 12px,
+          rgba(0,0,0,0.03) 24px
+        );
+    }
+    .glass-dark {
+      background: rgba(10, 10, 10, 0.88);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(252, 173, 43, 0.35);
+    }
+    .glass-gold {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    .text-outline {
+      text-shadow:
+        3px 3px 0 #0a0a0a,
+        -1px -1px 0 #0a0a0a,
+        1px -1px 0 #0a0a0a,
+        -1px 1px 0 #0a0a0a,
+        0 0 30px rgba(0,0,0,0.4);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1208 100%);
+      color: #fcad2b;
+      border: 2px solid #0a0a0a;
+      transition: all 0.25s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #1a1208 0%, #0a0a0a 100%);
+      box-shadow: 0 0 30px rgba(10,10,10,0.5);
+      transform: translateY(-2px) scale(1.03);
+    }
+    .btn-secondary {
+      background: linear-gradient(135deg, #0a0a0a 0%, #222 100%);
+      color: #fff;
+      border: 2px solid #0a0a0a;
+      transition: all 0.25s ease;
+    }
+    .btn-secondary:hover {
+      border-color: #fcad2b;
+      color: #fcad2b;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+    }
+    .step-card {
+      background: rgba(10, 10, 10, 0.9);
+      border: 2px solid rgba(252, 173, 43, 0.4);
+      transition: all 0.3s ease;
+    }
+    .step-card:hover {
+      border-color: #fcad2b;
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.35), 0 0 25px rgba(252,173,43,0.25);
+    }
+    .nav-scrolled {
+      background: rgba(10, 10, 10, 0.92) !important;
+      border-bottom: 1px solid rgba(252, 173, 43, 0.3);
+    }
+    .ca-box {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      letter-spacing: 0.02em;
+    }
+    .horn-divider {
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #0a0a0a, #fcad2b, #0a0a0a, transparent);
+    }
+    #toast {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(10px);
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .banner-mask {
+      mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    }
+    .x-icon-bg {
+      background: #0a0a0a;
+    }
+  </style>
+</head>
+<body class="font-body text-bison-dark antialiased bison-pattern">
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] glass-dark text-bison-gold px-6 py-3 rounded-full font-bold shadow-glow text-sm sm:text-base">
+    CA copied to clipboard!
+  </div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-3 group">
+        <img src="logo.png" alt="Mega Bison Logo" class="w-11 h-11 sm:w-12 sm:h-12 rounded-full ring-2 ring-bison-gold/60 group-hover:ring-bison-gold shadow-glow-sm transition" />
+        <div class="leading-tight">
+          <span class="font-display text-xl sm:text-2xl tracking-wide text-bison-gold uppercase">Mega Bison</span>
+          <span class="hidden sm:block text-[10px] tracking-[0.25em] text-bison-gold/70 font-bold">$MEGABISON</span>
+        </div>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-wider text-white/90">
+        <a href="#about" class="hover:text-bison-gold transition">About</a>
+        <a href="#howtobuy" class="hover:text-bison-gold transition">How to Buy</a>
+        <a href="#chart" class="hover:text-bison-gold transition">Chart</a>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="https://t.me/MegaBison_rh" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-white/20 hover:ring-bison-gold hover:scale-110 transition shadow-lg" title="Telegram">
+          <img src="tg.png" alt="Telegram" class="w-full h-full object-cover" />
+        </a>
+        <a href="https://x.com/MegaBison_rh" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full x-icon-bg flex items-center justify-center ring-2 ring-white/20 hover:ring-bison-gold hover:scale-110 transition shadow-lg p-2" title="X / Twitter">
+          <img src="x.png" alt="X / Twitter" class="w-full h-full object-contain invert" />
+        </a>
+        <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex btn-primary font-display uppercase tracking-wider text-sm px-4 py-2 rounded-full animate-pulse-glow">
+          Buy Now
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home" class="relative pt-20 sm:pt-24 overflow-hidden">
+    <!-- Banner backdrop -->
+    <div class="absolute inset-0 pointer-events-none">
+      <img src="banner.png" alt="" class="w-full h-full object-cover opacity-25 banner-mask scale-105" />
+      <div class="absolute inset-0 bg-gradient-to-b from-bison-gold/40 via-transparent to-bison-gold"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+        <!-- Copy -->
+        <div class="order-2 lg:order-1 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 glass-dark text-bison-gold text-xs font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full mb-5 shadow-card">
+            <span class="w-2 h-2 rounded-full bg-bison-gold animate-pulse"></span>
+            Live on Solana
+          </div>
+
+          <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase leading-[0.9] text-outline text-white mb-3">
+            Mega<br /><span class="text-bison-dark" style="text-shadow: 3px 3px 0 #fff, -1px -1px 0 #0a0a0a, 1px -1px 0 #0a0a0a, -1px 1px 0 #0a0a0a;">Bison</span>
+          </h1>
+
+          <p class="font-display text-2xl sm:text-3xl text-bison-dark tracking-widest mb-4">$MEGABISON</p>
+
+          <p class="text-base sm:text-lg text-bison-dark/90 font-semibold max-w-xl mx-auto lg:mx-0 leading-relaxed mb-8">
+            Mega Bison charges with unstoppable power, fearless momentum, and wild meme energy across Solana.
+          </p>
+
+          <!-- CA Copy -->
+          <div class="glass-dark rounded-2xl p-4 sm:p-5 mb-6 shadow-card max-w-xl mx-auto lg:mx-0">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-bison-gold text-xs font-bold uppercase tracking-widest">Contract Address</span>
+              <span class="text-[10px] text-white/50 font-bold uppercase">Solana</span>
+            </div>
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <code id="ca-address" class="ca-box flex-1 text-white text-xs sm:text-sm break-all bg-black/40 px-3 py-2.5 rounded-xl border border-bison-gold/20">
+                TBA
+              </code>
+              <button type="button" onclick="copyCA()" class="btn-primary font-bold uppercase text-sm px-5 py-2.5 rounded-xl whitespace-nowrap flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                Copy CA
+              </button>
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+            <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="btn-primary font-display uppercase tracking-wider text-lg px-8 py-4 rounded-2xl shadow-card flex items-center justify-center gap-2 animate-pulse-glow">
+              <span class="inline-block animate-charge">🐂</span> Buy Now
+            </a>
+            <a href="https://dexscreener.com/solana/TBA" target="_blank" rel="noopener noreferrer" class="btn-secondary font-display uppercase tracking-wider text-lg px-8 py-4 rounded-2xl shadow-card flex items-center justify-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+              Chart
+            </a>
+          </div>
+        </div>
+
+        <!-- Logo / Banner visual -->
+        <div class="order-1 lg:order-2 flex flex-col items-center">
+          <div class="relative animate-float">
+            <div class="absolute inset-0 blur-3xl bg-bison-gold/50 rounded-full scale-90"></div>
+            <img src="logo.png" alt="Mega Bison" class="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full ring-4 ring-bison-dark shadow-glow object-cover" />
+          </div>
+          <div class="mt-6 w-full max-w-md rounded-2xl overflow-hidden shadow-card ring-2 ring-bison-dark/40">
+            <img src="banner.png" alt="Mega Bison charging" class="w-full h-auto object-cover" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="horn-divider"></div>
+
+  <!-- About / Narrative -->
+  <section id="about" class="py-16 sm:py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl uppercase text-outline text-white mb-3">The Charge</h2>
+        <p class="text-bison-dark font-bold tracking-[0.3em] uppercase text-sm">Unstoppable · Fearless · Wild</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass-dark rounded-3xl p-7 shadow-card text-center group hover:scale-[1.02] transition duration-300">
+          <div class="text-4xl mb-4">⚡</div>
+          <h3 class="font-display text-2xl text-bison-gold uppercase mb-3">Unstoppable Power</h3>
+          <p class="text-white/75 text-sm leading-relaxed">
+            Once Mega Bison starts the stampede, nothing stands in the way. Pure Solana force, zero hesitation.
+          </p>
+        </div>
+        <div class="glass-dark rounded-3xl p-7 shadow-card text-center group hover:scale-[1.02] transition duration-300">
+          <div class="text-4xl mb-4">🔥</div>
+          <h3 class="font-display text-2xl text-bison-gold uppercase mb-3">Fearless Momentum</h3>
+          <p class="text-white/75 text-sm leading-relaxed">
+            No brakes. No fear. Only forward motion — the herd moves as one across the blockchain prairie.
+          </p>
+        </div>
+        <div class="glass-dark rounded-3xl p-7 shadow-card text-center group hover:scale-[1.02] transition duration-300">
+          <div class="text-4xl mb-4">💀</div>
+          <h3 class="font-display text-2xl text-bison-gold uppercase mb-3">Wild Meme Energy</h3>
+          <p class="text-white/75 text-sm leading-relaxed">
+            Born for the timeline. Built for the culture. $MEGABISON is raw meme power unleashed on Solana.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-10 glass-dark rounded-3xl p-8 sm:p-10 shadow-card text-center max-w-3xl mx-auto">
+        <img src="logo.png" alt="" class="w-16 h-16 rounded-full mx-auto mb-5 ring-2 ring-bison-gold/50" />
+        <p class="text-lg sm:text-xl text-white/90 font-medium leading-relaxed italic">
+          “Mega Bison charges with unstoppable power, fearless momentum, and wild meme energy across Solana.”
+        </p>
+        <p class="mt-4 font-display text-bison-gold text-xl tracking-wider">— $MEGABISON</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="horn-divider"></div>
+
+  <!-- How to Buy -->
+  <section id="howtobuy" class="py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl uppercase text-outline text-white mb-3">How to Buy</h2>
+        <p class="text-bison-dark font-bold text-base sm:text-lg max-w-xl mx-auto">
+          Grab $MEGABISON with SOL in 4 simple steps. Join the stampede.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        <!-- Step 1 -->
+        <div class="step-card rounded-3xl p-6 sm:p-7 relative overflow-hidden">
+          <div class="absolute top-3 right-4 font-display text-6xl text-bison-gold/10 select-none">01</div>
+          <div class="w-12 h-12 rounded-2xl bg-bison-gold text-bison-dark font-display text-xl flex items-center justify-center mb-5 shadow-glow-sm">1</div>
+          <h3 class="font-display text-xl text-bison-gold uppercase mb-3">Get a Wallet</h3>
+          <p class="text-white/70 text-sm leading-relaxed">
+            Download <strong class="text-white">Phantom</strong> or <strong class="text-white">Solflare</strong>. Create a wallet and back up your seed phrase securely.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card rounded-3xl p-6 sm:p-7 relative overflow-hidden">
+          <div class="absolute top-3 right-4 font-display text-6xl text-bison-gold/10 select-none">02</div>
+          <div class="w-12 h-12 rounded-2xl bg-bison-gold text-bison-dark font-display text-xl flex items-center justify-center mb-5 shadow-glow-sm">2</div>
+          <h3 class="font-display text-xl text-bison-gold uppercase mb-3">Fund with SOL</h3>
+          <p class="text-white/70 text-sm leading-relaxed">
+            Buy <strong class="text-white">SOL</strong> on an exchange (Binance, Coinbase, etc.) and send it to your Solana wallet address.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card rounded-3xl p-6 sm:p-7 relative overflow-hidden">
+          <div class="absolute top-3 right-4 font-display text-6xl text-bison-gold/10 select-none">03</div>
+          <div class="w-12 h-12 rounded-2xl bg-bison-gold text-bison-dark font-display text-xl flex items-center justify-center mb-5 shadow-glow-sm">3</div>
+          <h3 class="font-display text-xl text-bison-gold uppercase mb-3">Open the Swap</h3>
+          <p class="text-white/70 text-sm leading-relaxed">
+            Hit <strong class="text-white">Buy Now</strong> to open Pump.fun swap, or paste the $MEGABISON CA into your wallet’s swap.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card rounded-3xl p-6 sm:p-7 relative overflow-hidden">
+          <div class="absolute top-3 right-4 font-display text-6xl text-bison-gold/10 select-none">04</div>
+          <div class="w-12 h-12 rounded-2xl bg-bison-gold text-bison-dark font-display text-xl flex items-center justify-center mb-5 shadow-glow-sm">4</div>
+          <h3 class="font-display text-xl text-bison-gold uppercase mb-3">Swap SOL → $MEGABISON</h3>
+          <p class="text-white/70 text-sm leading-relaxed">
+            Select SOL as input, $MEGABISON as output, confirm the swap — and join the Mega Bison herd.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="btn-primary font-display uppercase tracking-wider text-lg px-10 py-4 rounded-2xl shadow-card w-full sm:w-auto text-center animate-pulse-glow">
+          🐂 Buy $MEGABISON Now
+        </a>
+        <button type="button" onclick="copyCA()" class="btn-secondary font-display uppercase tracking-wider text-lg px-10 py-4 rounded-2xl shadow-card w-full sm:w-auto">
+          Copy CA
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="horn-divider"></div>
+
+  <!-- Chart / Dexscreener Embed -->
+  <section id="chart" class="py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10">
+        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl uppercase text-outline text-white mb-3">Live Chart</h2>
+        <p class="text-bison-dark font-bold text-base sm:text-lg">
+          Track the stampede in real time on DexScreener
+        </p>
+      </div>
+
+      <div class="glass-dark rounded-3xl p-3 sm:p-4 shadow-card overflow-hidden">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-3 px-2">
+          <span class="text-bison-gold font-display text-lg uppercase tracking-wider">$MEGABISON / SOL</span>
+          <a href="https://dexscreener.com/solana/TBA" target="_blank" rel="noopener noreferrer" class="text-xs sm:text-sm font-bold text-white/70 hover:text-bison-gold transition uppercase tracking-wider flex items-center gap-1">
+            Open DexScreener
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+        <div class="rounded-2xl overflow-hidden bg-black aspect-[16/10] min-h-[320px] sm:min-h-[480px]">
+          <iframe
+            id="dexscreener-embed"
+            src="https://dexscreener.com/solana/TBA?embed=1&theme=dark&trades=0&info=0"
+            title="Mega Bison DexScreener Chart"
+            class="w-full h-full min-h-[320px] sm:min-h-[480px] border-0"
+            allow="clipboard-write"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="btn-primary font-display uppercase tracking-wider px-8 py-3.5 rounded-2xl shadow-card">
+          Buy Now
+        </a>
+        <a href="https://dexscreener.com/solana/TBA" target="_blank" rel="noopener noreferrer" class="btn-secondary font-display uppercase tracking-wider px-8 py-3.5 rounded-2xl shadow-card">
+          Full Chart
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="horn-divider"></div>
+
+  <!-- Join Community CTA -->
+  <section class="py-16 sm:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <div class="glass-dark rounded-[2rem] p-8 sm:p-12 shadow-card relative overflow-hidden">
+        <div class="absolute -top-20 -right-20 w-60 h-60 bg-bison-gold/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-bison-gold/10 rounded-full blur-3xl"></div>
+        <img src="logo.png" alt="" class="w-20 h-20 rounded-full mx-auto mb-6 ring-4 ring-bison-gold/40 shadow-glow animate-float" />
+        <h2 class="font-display text-3xl sm:text-5xl uppercase text-bison-gold mb-4">Join the Herd</h2>
+        <p class="text-white/80 max-w-lg mx-auto mb-8 leading-relaxed">
+          Connect with Mega Bison warriors. Memes, alpha, and stampede energy — all on Telegram & X.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="https://t.me/MegaBison_rh" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-[#229ED9] hover:bg-[#1a8bc2] text-white font-display uppercase tracking-wider px-6 py-3.5 rounded-2xl transition shadow-lg hover:scale-105">
+            <img src="tg.png" alt="" class="w-8 h-8 rounded-full" />
+            Telegram
+          </a>
+          <a href="https://x.com/MegaBison_rh" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 x-icon-bg hover:bg-zinc-900 text-white font-display uppercase tracking-wider px-6 py-3.5 rounded-2xl transition shadow-lg hover:scale-105 border border-white/10">
+            <span class="w-8 h-8 rounded-full x-icon-bg flex items-center justify-center p-1.5 border border-white/20">
+              <img src="x.png" alt="" class="w-full h-full object-contain invert" />
+            </span>
+            Twitter / X
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t-2 border-bison-dark/20 bg-bison-dark text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <img src="logo.png" alt="Mega Bison" class="w-12 h-12 rounded-full ring-2 ring-bison-gold/50" />
+          <div>
+            <p class="font-display text-xl text-bison-gold uppercase tracking-wide">Mega Bison</p>
+            <p class="text-xs text-white/50 font-bold tracking-widest">$MEGABISON · SOLANA</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="https://t.me/MegaBison_rh" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full overflow-hidden ring-2 ring-white/10 hover:ring-bison-gold hover:scale-110 transition" title="Telegram">
+            <img src="tg.png" alt="Telegram" class="w-full h-full object-cover" />
+          </a>
+          <a href="https://x.com/MegaBison_rh" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full x-icon-bg flex items-center justify-center ring-2 ring-white/10 hover:ring-bison-gold hover:scale-110 transition p-2.5" title="X / Twitter">
+            <img src="x.png" alt="X" class="w-full h-full object-contain invert" />
+          </a>
+          <a href="https://dexscreener.com/solana/TBA" target="_blank" rel="noopener noreferrer" class="text-xs font-bold uppercase tracking-wider text-white/60 hover:text-bison-gold transition px-3">
+            Chart
+          </a>
+          <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="text-xs font-bold uppercase tracking-wider text-bison-gold hover:text-bison-glow transition px-3">
+            Buy
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-white/10 text-center">
+        <p class="text-white/40 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
+          $MEGABISON is a meme coin with no intrinsic value or expectation of financial return.
+          Cryptocurrency trading involves risk. DYOR. Not financial advice.
+        </p>
+        <p class="mt-3 text-white/30 text-xs">© 2026 Mega Bison · All rights reserved</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Contract address — replace TBA when live
+    const CONTRACT_ADDRESS = 'TBA';
+
+    function copyCA() {
+      const text = CONTRACT_ADDRESS;
+      const showToast = () => {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2200);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(showToast).catch(() => fallbackCopy(text, showToast));
+      } else {
+        fallbackCopy(text, showToast);
+      }
+    }
+
+    function fallbackCopy(text, cb) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        cb();
+      } catch (e) {
+        alert('Copy this CA: ' + text);
+      }
+      document.body.removeChild(ta);
+    }
+
+    // Navbar style on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        navbar.classList.add('nav-scrolled');
+      } else {
+        navbar.classList.remove('nav-scrolled');
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>
